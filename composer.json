@@ -1,0 +1,29 @@
+{
+    "name": "mali/customframework",
+    "description": "MVC app to practice on OOP design and using SOLID prenciple with it",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "/app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mohamedali",
+            "email": "muhammedaly021@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":">=8.1",
+        "mvc/customframework":"1.0"
+    },
+    "version": "1.0",
+    "repositories": [
+        {
+            "type":"path",
+            "url": "customframework"
+        }
+    ]
+}

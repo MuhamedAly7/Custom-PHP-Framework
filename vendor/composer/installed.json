@@ -1,0 +1,37 @@
+{
+    "packages": [
+        {
+            "name": "mvc/customframework",
+            "version": "1.0",
+            "version_normalized": "1.0.0.0",
+            "dist": {
+                "type": "path",
+                "url": "customframework",
+                "reference": "27e7fd7bc28a105ab16f01102898d3bdf800362c"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Customframework\\": "framework/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MohamedAli",
+                    "email": "muhammedaly021@gmail.com"
+                }
+            ],
+            "description": "customframework",
+            "transport-options": {
+                "relative": true
+            },
+            "install-path": "../mvc/customframework"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

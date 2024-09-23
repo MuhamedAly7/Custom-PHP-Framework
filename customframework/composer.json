@@ -1,0 +1,20 @@
+{
+    "name": "mvc/customframework",
+    "description": "customframework",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Customframework\\": "framework/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MohamedAli",
+            "email": "muhammedaly021@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "version": "1.0"
+}
