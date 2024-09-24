@@ -25,7 +25,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../mvc/customframework',
             'aliases' => array(),
-            'reference' => '27e7fd7bc28a105ab16f01102898d3bdf800362c',
+            'reference' => '46253ef60186c3a6757f1c35537730a4d8b00c98',
             'dev_requirement' => false,
         ),
     ),

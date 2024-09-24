@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Illuminates\\' => array($vendorDir . '/mvc/customframework/illuminates'),
     'Customframework\\' => array($vendorDir . '/mvc/customframework/framework'),
-    'App\\' => array('/app'),
+    'App\\' => array($baseDir . '/app'),
 );
