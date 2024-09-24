@@ -18,6 +18,7 @@ class ComposerStaticInit67e7c1ee15a1fcf02e0ff23ace2d59dc
         'C' => 
         array (
             'Customframework\\' => 16,
+            'Contracts\\' => 10,
         ),
         'A' => 
         array (
@@ -33,6 +34,10 @@ class ComposerStaticInit67e7c1ee15a1fcf02e0ff23ace2d59dc
         'Customframework\\' => 
         array (
             0 => __DIR__ . '/..' . '/mvc/customframework/framework',
+        ),
+        'Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mvc/customframework/Contracts',
         ),
         'App\\' => 
         array (

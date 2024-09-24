@@ -80,3 +80,11 @@ if(!function_exists('decrypt'))
     }
 }
 
+
+if(!function_exists('url'))
+{
+    function url(string $url = '') : string
+    {
+        return '/public/'.ltrim($url, '/');
+    }
+}

@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Illuminates\\' => array($baseDir . '/illuminates'),
     'Customframework\\' => array($baseDir . '/framework'),
+    'Contracts\\' => array($baseDir . '/Contracts'),
 );

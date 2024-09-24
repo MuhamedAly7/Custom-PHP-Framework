@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Illuminates\\' => array($vendorDir . '/mvc/customframework/illuminates'),
     'Customframework\\' => array($vendorDir . '/mvc/customframework/framework'),
+    'Contracts\\' => array($vendorDir . '/mvc/customframework/Contracts'),
     'App\\' => array($baseDir . '/app'),
 );

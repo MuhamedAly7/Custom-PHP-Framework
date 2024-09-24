@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "Customframework\\": "framework/",
-            "Illuminates\\": "illuminates/"
+            "Illuminates\\": "illuminates/",
+            "Contracts\\": "Contracts/"
         },
         "files": [
             "helpers/main.php"

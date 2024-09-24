@@ -77,9 +77,24 @@ class Router
                 }
                 else {
                     $action = $val['action'];
-                    $middleware = $val['middleware'];
-                    echo call_user_func_array([new $controller, $action], $params);
-                    return '';
+                    $middlewareStack = $val['middleware'];
+                    
+                    $next = function($request) use ($controller, $action, $params)
+                    {
+                        return call_user_func_array([new $controller, $action], $params);
+                    };
+
+                    foreach(array_reverse($middlewareStack) as $middleware)
+                    {
+                        $next = function($request) use($middleware, $next)
+                        {
+                            // var_dump($middleware);
+                            // exit();
+                            return (new $middleware)->handle($request, $next);
+                        };
+                    }
+
+                    return $next($uri);
                 }
             }
         }
