@@ -4,6 +4,14 @@ namespace Illuminates\Sessions;
 
 class Session
 {    
+    public function __construct()
+    {
+        session_save_path(config('session.session_save_path'));
+        ini_set('session.gc_probability', 1);
+        session_start([
+            'cookie_lifetime' => config('session.expiration_timeout')
+        ]);
+    }
     /**
      * make
      *
@@ -18,7 +26,20 @@ class Session
         }
         return isset($_SESSION[$key]) ? decrypt($_SESSION[$key]) : '';
     }
+
     
+    /**
+     * get
+     *
+     * @param  mixed $key
+     * @return void
+     */
+    public static function get(string $key)
+    {
+        return isset($_SESSION[$key]) ? decrypt($_SESSION[$key]) : $key;
+    }
+    
+
     /**
      * has
      *
