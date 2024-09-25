@@ -2,6 +2,8 @@
 
 namespace Illuminates\Router;
 
+use Illuminates\Middleware\Middleware;
+
 class Router
 {
     protected static $routes = [
@@ -72,34 +74,44 @@ class Router
                 $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
                 $controller = $val['controller'];
                 if (is_object($controller)) {
-                    echo $controller(...$params);
-                    return '';
+
+                    $val['middleware'] = $val['action'];
+                    $middlewareStack = $val['middleware'];
+                    
+                    // Prepare Data and add anonymous function to $next variable
+                    $next = function($request) use ($controller, $params)
+                    {
+                        return $controller(...$params);
+                    };
+                    
+                    // Middleware handling during using anonymous function
+                    $next = Middleware::handleMiddleware($middlewareStack, $next);
+                    
+                    echo $next($uri);
                 }
                 else {
                     $action = $val['action'];
                     $middlewareStack = $val['middleware'];
                     
+                    // Prepare Data and add anonymous function to $next variable
                     $next = function($request) use ($controller, $action, $params)
                     {
                         return call_user_func_array([new $controller, $action], $params);
                     };
 
-                    foreach(array_reverse($middlewareStack) as $middleware)
-                    {
-                        $next = function($request) use($middleware, $next)
-                        {
-                            // var_dump($middleware);
-                            // exit();
-                            return (new $middleware)->handle($request, $next);
-                        };
-                    }
+                    // Middleware handling during using controller with action
+                    $next = Middleware::handleMiddleware($middlewareStack, $next);
 
-                    return $next($uri);
+                    echo  $next($uri);
                 }
+                return '';
             }
         }
 
         throw new \Exception('This route '. $uri .' not found');
     }
+
+    
+    
 }
 

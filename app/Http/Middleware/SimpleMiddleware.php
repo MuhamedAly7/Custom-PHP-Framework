@@ -2,23 +2,18 @@
 
 namespace App\Http\Middleware;
 
-use Contracts\MiddlewareContract;
+use Contracts\Middleware\Contract;
 
-class SimpleMiddleware implements MiddlewareContract
+class SimpleMiddleware implements Contract
 {    
-    /**
-     * handle
-     *
-     * @param  mixed $request
-     * @param  mixed $next
-     * @return mixed
-     */
-    public function handle($request, $next)
+    public function handle($request, $next, ...$role)
     {
-        if (2 == 2) {
-            header('Location: '.url('/'));
+        if($role[0] == 'user')
+        {
+            header('Location: '.url('about'));
             exit();
         }
+
         return $next($request);
     }
 }
