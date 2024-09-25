@@ -3,6 +3,7 @@
 namespace Illuminates\Middleware;
 
 use App\Core;
+use Illuminates\Router\Segment;
 
 class Middleware
 {
@@ -32,8 +33,9 @@ class Middleware
     }
 
 
-    public static function getFromCore($key, $type = 'web')
+    public static function getFromCore($key)
     {
+        $type = Segment::get(0) == 'api' ? 'api' : 'web';
         if ($type == 'web' && isset(Core::$middlewareWebRoute[$key])) {
             return Core::$middlewareWebRoute[$key];
         }

@@ -5,6 +5,7 @@ namespace Illuminates;
 
 use App\Core;
 use Illuminates\Router\Route;
+use Illuminates\Router\Segment;
 
 class Application
 {
@@ -18,7 +19,12 @@ class Application
     public function start()
     {   
         $this->router = new Route();
-        $this->webRoute();
+        if (Segment::get(0) == 'api') {
+            $this->apiRoute();
+        }
+        else {
+            $this->webRoute();
+        }
     }
     
     /**

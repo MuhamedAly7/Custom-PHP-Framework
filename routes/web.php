@@ -10,9 +10,12 @@ use Illuminates\Sessions\Session;
 Route::get('/', function (){
     return 'another index page';
 }, ['simple,admin']);
-Route::get('/about', HomeController::class, 'about');
-// Route::get('/article/{id}', HomeController::class, 'article');
-Route::get('/article/{id}/{name}', function ($id, $name)
-{
-    return $id."=".$name;
+
+Route::group(['prefix' => 'site'], function(){
+    Route::get('/about', HomeController::class, 'about');
+    // Route::get('/article/{id}', HomeController::class, 'article');
+    Route::get('/article/{id}/{name}', function ($id, $name)
+    {
+        return $id."=".$name;
+    });
 });
