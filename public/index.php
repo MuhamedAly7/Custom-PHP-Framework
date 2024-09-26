@@ -1,6 +1,9 @@
 <?php
 // Define root directory path
 define('ROOT_PATH', dirname(__FILE__));
+define('ROOT_DIR', '/public/');
+
+
 /**
  * Run Composer Autoloader
 */

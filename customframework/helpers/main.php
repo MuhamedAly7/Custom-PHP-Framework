@@ -85,6 +85,15 @@ if(!function_exists('url'))
 {
     function url(string $url = '') : string
     {
-        return '/public/'.ltrim($url, '/');
+        return ROOT_DIR.ltrim($url, '/');
+    }
+}
+
+
+if(!function_exists('storage_path'))
+{
+    function storage_path(string $file = null)
+    {
+        return !is_null($file) ? base_path('storage').'/'.$file : '';
     }
 }

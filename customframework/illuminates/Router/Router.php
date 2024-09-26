@@ -2,6 +2,7 @@
 
 namespace Illuminates\Router;
 
+use Illuminates\Logs\Log;
 use Illuminates\Middleware\Middleware;
 
 class Router
@@ -9,21 +10,6 @@ class Router
     protected static $routes = [];
     protected static $groupAttributes = [];
 
-    private static $public;
-
-        
-        
-    /**
-     * public_path
-     *
-     * @param  mixed $bind
-     * @return string
-     */
-    public static function public_path($bind = null) : string
-    {
-        static::$public = $bind ?? '/public/';
-        return static::$public;
-    }
     
     /**
      * add
@@ -52,7 +38,16 @@ class Router
         ];
     }
 
-    public static function group($attributes, $callback)
+
+        
+    /**
+     * group
+     *
+     * @param  mixed $attributes
+     * @param  mixed $callback
+     * @return void
+     */
+    public static function group($attributes, $callback) : void
     {
         $previousGroupAttribute = static::$groupAttributes;
         static::$groupAttributes = array_merge(static::$groupAttributes, $attributes);
@@ -60,14 +55,15 @@ class Router
         static::$groupAttributes = $previousGroupAttribute;
     }
 
+
         
     /**
      * applyGroupPrefix
      *
      * @param  mixed $route
-     * @return void
+     * @return string
      */
-    protected static function applyGroupPrefix($route)
+    protected static function applyGroupPrefix($route) : string
     {
         if (isset(static::$groupAttributes['prefix'])) {
             $full_route = rtrim(static::$groupAttributes['prefix'], '/').'/'.ltrim($route, '/');
@@ -78,12 +74,20 @@ class Router
         }
     }
 
-    protected static function getGroupMiddleware()
+
+        
+    /**
+     * getGroupMiddleware
+     *
+     * @return array
+     */
+    protected static function getGroupMiddleware() : array
     {
         return static::$groupAttributes['middleware'] ?? [];
     }
 
-        
+
+    
     /**
      * routes
      *
@@ -103,12 +107,9 @@ class Router
      */
     public static function dispatch($uri, $method)
     {
-        $uri = rtrim(ltrim($uri, static::public_path()), '/');
+        $uri = rtrim(ltrim($uri, ROOT_DIR), '/');
         $uri = empty($uri) ? '/' : $uri;
-
-        // echo "<pre>";
-        // var_dump(static::$routes);
-        // exit;
+        $method = strtoupper($method);
 
         foreach (static::$routes as $route) {
             if ($route['method'] == $method) {
@@ -146,7 +147,7 @@ class Router
                         };
     
                         // Middleware handling during using controller with action
-                        $next = Middleware::handleMiddleware($middlewareStack, $next, $type);
+                        $next = Middleware::handleMiddleware($middlewareStack, $next);
     
                         echo  $next($uri);
                     }
@@ -155,7 +156,7 @@ class Router
             }
         }
 
-        throw new \Exception('This route '. $uri .' not found');
+        throw new Log('This route '. $uri .' not found');
     }
 
     

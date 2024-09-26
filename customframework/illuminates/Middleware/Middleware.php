@@ -3,6 +3,7 @@
 namespace Illuminates\Middleware;
 
 use App\Core;
+use Illuminates\Logs\Log;
 use Illuminates\Router\Segment;
 
 class Middleware
@@ -43,7 +44,8 @@ class Middleware
             return Core::$middlewareApiRoute[$key];
         }
         else {
-            throw new \Exception('This Middleware'.$key.' Not Found');
+            // throw new \Exception('This Middleware'.$key.' Not Found');
+            throw new Log('This Middleware'.$key.' Not Found');
         }
     }
 }
