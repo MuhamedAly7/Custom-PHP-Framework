@@ -97,3 +97,11 @@ if(!function_exists('storage_path'))
         return !is_null($file) ? base_path('storage').'/'.$file : '';
     }
 }
+
+if(!function_exists('view'))
+{
+    function view($view, null|array $data)
+    {
+        Illuminates\Views\View::make($view, $data);
+    }
+}

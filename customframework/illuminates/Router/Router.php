@@ -108,7 +108,7 @@ class Router
     public static function dispatch($uri, $method)
     {
         $uri = rtrim(ltrim($uri, ROOT_DIR), '/');
-        $uri = empty($uri) ? '/' : $uri;
+        // $uri = empty($uri) ? '/' : $uri;
         $method = strtoupper($method);
 
         foreach (static::$routes as $route) {

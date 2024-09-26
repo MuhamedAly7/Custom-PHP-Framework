@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 class HomeController
 {
-    public function index(){
-        echo "Welcome to index page";
+    public function index()
+    {
+        $title = 'title';
+        $content = 'content data';
+        return view('index', compact('title', 'content'));
     }
 
     public function about(){

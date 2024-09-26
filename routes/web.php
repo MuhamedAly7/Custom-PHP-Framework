@@ -5,11 +5,11 @@ use App\Http\Middleware\SimpleMiddleware;
 use Illuminates\Router\Route;
 use Illuminates\Sessions\Session;
 
-// Route::get('/', HomeController::class, 'index');
+Route::get('/', HomeController::class, 'index');
 // Route::get('/', fn() => 'Welcome to index!!');
-Route::get('/', function (){
-    return 'another index page';
-}, ['simple,admin']);
+// Route::get('/', function (){
+//     return 'Welcome to index page';
+// });
 
 Route::group(['prefix' => 'site'], function(){
     Route::get('/about', HomeController::class, 'about');
