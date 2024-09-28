@@ -19,4 +19,9 @@ class HomeController
     {
         echo "Welcome to article page id = ".$id;
     }
+
+    public function api_any()
+    {
+        echo "Welcome to api any page";
+    }
 }

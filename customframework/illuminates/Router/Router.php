@@ -7,7 +7,7 @@ use Illuminates\Middleware\Middleware;
 
 class Router
 {
-    protected static $routes = [];
+    public static $routes = [];
     protected static $groupAttributes = [];
 
     
@@ -119,10 +119,9 @@ class Router
                     $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
                     $controller = $route['controller'];
                     if (is_object($controller)) {
-    
-                        $route['middleware'] = $route['action'];
-                        $middlewareStack = $route['middleware'];
                         
+                        $middlewareStack = array_merge($route['middleware'] ?? [], $route['action'] ?? []);
+
                         // Prepare Data and add anonymous function to $next variable
                         $next = function($request) use ($controller, $params)
                         {

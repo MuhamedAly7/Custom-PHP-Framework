@@ -2,6 +2,8 @@
 
 namespace Illuminates\Router;
 
+use Illuminates\Application;
+
 class Segment
 {
     public static function uri()

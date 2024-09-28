@@ -10,6 +10,7 @@ use Illuminates\Router\Segment;
 class Application
 {
     protected $router;
+    protected $framework_setting;
         
     /**
      * start
@@ -19,13 +20,18 @@ class Application
     public function start()
     {   
         $this->router = new Route();
-        if (Segment::get(0) == 'api') {
+        $this->framework_setting = new FrameworkSettings;
+        $this->framework_setting::setTimeZone();
+
+        if (parse_url(Segment::get(0))['path'] == 'api') {
             $this->apiRoute();
         }
         else {
             $this->webRoute();
         }
     }
+
+
     
     /**
      * __destruct
@@ -34,7 +40,7 @@ class Application
      */
     public function __destruct()
     {
-        $this->router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+        $this->router->dispatch(parse_url($_SERVER['REQUEST_URI'])['path'], $_SERVER['REQUEST_METHOD']);
     }
     
     /**
@@ -47,6 +53,7 @@ class Application
         foreach (Core::$globalWeb as $global) {
             new $global();
         }
+        $this->framework_setting::setLocale(config('app.locale'));
         include route_path('web.php'); 
     }
 
