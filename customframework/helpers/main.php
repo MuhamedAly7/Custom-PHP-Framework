@@ -92,9 +92,9 @@ if(!function_exists('url'))
 
 if(!function_exists('storage_path'))
 {
-    function storage_path(string $file = null)
+    function storage_path(string $path = null)
     {
-        return !is_null($file) ? base_path('storage').'/'.$file : '';
+        return !is_null($path) ? base_path('storage').'/'.$path : '';
     }
 }
 
