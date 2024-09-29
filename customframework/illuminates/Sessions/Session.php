@@ -6,12 +6,20 @@ class Session
 {    
     public function __construct()
     {
-        session_save_path(config('session.session_save_path'));
-        ini_set('session.gc_probability', 1);
-        session_start([
-            'cookie_lifetime' => config('session.expiration_timeout')
-        ]);
+        
     }
+
+    public static function start()
+    {
+        $handler = new SessionHandler(config('session.session_save_path'), config('session.session_prefix'));
+        $handler->gc(config('session.expiration_timeout'));
+
+        session_set_save_handler($handler, true);
+        session_name(config('session.session_prefix'));
+        session_start();
+    }
+
+
     /**
      * make
      *
@@ -21,6 +29,7 @@ class Session
      */
     public static function make(string $key, mixed $value) : mixed
     {
+        static::start();
         if (!is_null($value)) {
             $_SESSION[$key] = encrypt($value);
         }
@@ -78,6 +87,7 @@ class Session
      */
     public static function forget(string $key)
     {
+        static::start();
         if(isset($_SESSION[$key]))
         {
             unset($_SESSION[$key]);
@@ -92,6 +102,14 @@ class Session
      */
     public static function forget_all()
     {
+        static::start();
         session_destroy();
     }
+
+
+    public function __destruct()
+    {
+        session_write_close();
+    }
+
 }

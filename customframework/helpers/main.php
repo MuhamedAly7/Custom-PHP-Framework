@@ -100,7 +100,7 @@ if(!function_exists('storage_path'))
 
 if(!function_exists('view'))
 {
-    function view($view, null|array $data)
+    function view($view, null|array $data = null)
     {
         Illuminates\Views\View::make($view, $data);
     }

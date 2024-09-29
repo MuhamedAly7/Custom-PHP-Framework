@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\SimpleMiddleware;
+use Illuminates\FrameworkSettings;
 use Illuminates\Router\Route;
 use Illuminates\Sessions\Session;
 
@@ -9,7 +10,9 @@ use Illuminates\Sessions\Session;
 // Route::get('/', fn() => 'Welcome to index!!');
 
 Route::get('/', function (){
+    // FrameworkSettings::setLocale('en');
     return Session::get('locale');
+    return view('index');
 });
 
 
